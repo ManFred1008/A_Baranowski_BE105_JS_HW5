@@ -4,60 +4,66 @@ b. имя эл. почты (до знака @) должно быть длино�
 c. после последней точки и после @, домен верхнего уровня (ru, by, com и т.п.) не может быть длиной менее 2 и более 11 символов. */
 task(13);
 
-let checkEmail = function(email) {
-   let codeEmail;
+
+let email = prompt('Введите email:', 'andrej.bar90@mail.ru');
+
+let checkEmail = function (email) {
+   let e;
+   let sumI = '';
+   for (let i = 0; i < email.length; i++) {
+      e = email[i].charCodeAt();
+      // console.log(e);
+      if ((e >= 65 && e <= 90) || (e >= 97 && e <= 122) || (e >= 48 && e <= 57) || e == 95 || e == 45 || e == 46 || e == 64) { 
+
+      } else {
+         alert('Адрес не должен содержать русские буквы и спецсимволы, кроме одной «собачки», знака подчеркивания, дефиса и точки');
+         break;
+      }
+      if ((i == 0 || i == email.length - 1) && (e == 95 || e == 45 || e == 46 || e == 64)) {
+         alert('«собачка», знак подчеркивания, дефиса и точки не могут быть первыми и последними в адресе')
+         break;
+      }
+      sumI = email[i] + email[i+1]
+      if (sumI == '..' || sumI == '@.' || sumI == '.@' || sumI == '.-' || sumI == '-.' || sumI == '._' || sumI == '_.' || sumI == '@@' || sumI == '@-' || sumI == '-@' || sumI == '@_' || sumI == '_@' || sumI == '--' || sumI == '-_' || sumI == '_-' || sumI == '__') {
+         alert('«собачка», знак подчеркивания, дефиса и точки не могут идти подряд');
+         break;
+      }
+   }
+
+   let sumToDog = '';
    if (email.indexOf('@') != email.lastIndexOf('@')) {
       alert('Не может быть более одной собачки!');
    } else   if (email.indexOf('@') == -1) {
                alert('Введите @:');
             } else if (email.indexOf('@') <= 2) {
                alert('имя до @ должно быть больше 2-х символов');
+            } else {
+               for (let i = 0; i < email.indexOf('@'); i++) {
+                  sumToDog = sumToDog + email[i];
+                  if (i == 0 && isNaN(email[i]) == false) {
+                     alert('Цифры не могут быть первыми в имени');
+                     break;
+                  }
+                  if ((e >= 65 && e <= 90) || (e >= 97 && e <= 122) || (e >= 48 && e <= 57) || e == 46) {
+                     
+                  } else {
+                     alert('имя может содержать только буквы, цифры и точку');
+                     break;
+                  }
+
+               }
+               if (isNaN(sumToDog) == false) {
+                  alert('Цифры не могут быть единственными в имени');
+               }
             }
-   let n = '';
-   console.log(email.indexOf('@'));
-   for (let i = 0; i < email.indexOf('@'); i++){
-      
-      codeEmail = email[i].charCodeAt();
-      console.log(codeEmail, email[i]);
-      // if ((codeEmail >= 65 && codeEmail <= 90) || (codeEmail >= 97 && codeEmail <= 122) || (codeEmail >= 48 && codeEmail <= 57) || codeEmail == 46) {
-      //    if (i = 0 && (codeEmail >= 48 && codeEmail <= 57)) {
-      //       alert('Имя не может начинаться с цифры');
-      //    } 
-      n += email[i];
-      // } else {
-      //    alert('Имя может содержать только буквы, цифры и точку');
-      // }
-      console.log(n);
+   if (email.indexOf('@') > email.lastIndexOf('.')) {
+      alert('Нет домена верхнего уровня');
+   } else if ((email.length - 1) - email.lastIndexOf('.') < 2 || (email.length - 1) - email.lastIndexOf('.') > 11) {
+      alert('домен верхнего уровня не может быть длиной менее 2 и более 11 символов');
+   } else {
+      alert('email введён правильно!');
+      console.log('email введён правильно!');
    }
-      if (isNaN(n)) {
-         alert('Верно!');
-      }else {
-         alert('Имя не может содержать только цифры');
-      }
-   
-
-   for (i = 0; i < email.length; i++) {
-      codeEmail = email[i].charCodeAt();
-      if ((codeEmail >= 65 && codeEmail <= 90) || (codeEmail >= 97 && codeEmail <= 122) || (codeEmail >= 48 && codeEmail <= 57) || codeEmail == 95 || codeEmail == 45 || codeEmail == 46 || codeEmail == 64) {
-         if ((i == 0 && (codeEmail == 95 || codeEmail == 45 || codeEmail == 46 || codeEmail == 64)) || (i == (email.length - 1) && (codeEmail == 95 || codeEmail == 45 || codeEmail == 46 || codeEmail == 64))) {
-            alert('«собачка», знак подчеркивания, дефис и точка, не могут быть первыми и последними в адресе');
-            break;
-         }
-         if (email[i] + email[i+1] == '..' || email[i] + email[i+1] == '@.' || email[i] + email[i+1] == '.@' || email[i] + email[i+1] == '.-' || email[i] + email[i+1] == '-.' || email[i] + email[i+1] == '._' || email[i] + email[i+1] == '_.' || email[i] + email[i+1] == '@-' || email[i] + email[i+1] == '-@' || email[i] + email[i+1] == '@_' || email[i] + email[i+1] == '_@' || email[i] + email[i+1] == '--' || email[i] + email[i+1] == '-_' || email[i] + email[i+1] == '_-' || email[i] + email[i+1] == '__') {
-            alert('Вы неправильно ввели email33333333!');
-            break;
-         }
-      }else {
-         alert('Вы неправильно ввели email!');
-         break;
-      }
-   }
-
-
 }
-
-// charCodeAt()
-
-let email = prompt('Введите email:');
 
 checkEmail(email);
