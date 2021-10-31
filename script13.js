@@ -76,10 +76,10 @@ let checkEmail = function (email) {
    } 
    
    if (mistakes == 0) {
-      alert(`Ошибки ${mistakes} - email введён правильно!`);
-      console.log(`Ошибки ${mistakes} - email введён правильно!`);
+      alert(`Ошибок ${mistakes} - email введён правильно!`);
+      console.log(`Ошибок ${mistakes} - email введён правильно!`);
    } else {
-      email = prompt(`Попробуйте ещё раз!`, 'andreeW.bar90@mail.ru');
+      email = prompt(`Ошибок: ${mistakes}. Попробуйте ещё раз!`, 'andreeW.bar90@mail.ru');
       mistakes = 0;
       checkEmail(email);
    }
